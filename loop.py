@@ -4,6 +4,7 @@ import adafruit_am2320
 import logging
 import json
 import time
+import sys
 from ISStreamer.Streamer import Streamer
 
 rootLogger = logging.getLogger()
@@ -35,6 +36,7 @@ while True:
     try:
         rh = sensor.relative_humidity
         temp = sensor.temperature
+        logging.info("logging temp as {temp} rh as {rh}".format(temp=temp, rh=rh))
         streamer.log('bucket_rh', rh)
         streamer.log('bucket_temp', temp)
     except:
