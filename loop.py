@@ -26,6 +26,7 @@ with open('config.json') as f:
 BUCKET_NAME = config['bucket_name']
 BUCKET_KEY = config['bucket_key']
 ACCESS_KEY = config['access_key']
+PREFIX_KEY = config['item_prefix']
 
 i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_am2320.AM2320(i2c)
@@ -37,8 +38,8 @@ while True:
         rh = sensor.relative_humidity
         temp = sensor.temperature
         logging.info("logging temp as {temp} rh as {rh}".format(temp=temp, rh=rh))
-        streamer.log('bucket_rh', rh)
-        streamer.log('bucket_temp', temp)
+        streamer.log("{prefix}_rh".format(prefix=PREFIX_KEY), rh)
+        streamer.log("{prefix}_temp".format(prefix=PREFIX_KEY), temp)
     except:
         logging.exception("everything broke")
 
