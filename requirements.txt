@@ -1,0 +1,2 @@
+adafruit-circuitpython-am2320>=1.2.2
+ISStreamer>=1.0.1
